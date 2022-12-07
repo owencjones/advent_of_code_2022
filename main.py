@@ -1,6 +1,6 @@
 from typing import Callable
 
-from src import day_01
+from aoc.src import day_01
 
 days = [day_01.do_output]
 

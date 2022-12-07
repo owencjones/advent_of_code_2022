@@ -1,4 +1,4 @@
-from util.read_data import read_data
+from util import read_data
 from typing import Tuple, List
 
 
