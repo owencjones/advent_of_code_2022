@@ -17,6 +17,9 @@ def output(elves) -> Tuple[int, int]:
         sum(elves[-3:])
     )
 
-if __name__ == "__main__":
+def do_output() -> None:
     output_answers = output(elves)
     print(f"The max elf is {output_answers[0]}, and the top three add up to {output_answers[1]}")
+
+if __name__ == "__main__":
+    do_output()
