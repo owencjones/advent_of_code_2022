@@ -36,22 +36,26 @@ def parse_instructions(instructions) -> list[tuple[int,int,int]]:
 
     return [(int(regex.match(s)[1]), int(regex.match(s)[2]) -1, int(regex.match(s)[3])-1) for s in instructions.split('\n')]
 
-stacks = parse_stacks(stacks_str)
-instructions = parse_instructions(instructions)
 
-for instruction in instructions:
-    amount, move_from, move_to = instruction
-    print(f"moving {amount} blocks from stack {move_from+1} to {move_to+1}")
+def get_result(stacks_str, instructions_str, stage_two=False) -> str:
+    stacks=parse_stacks(stacks_str)
+    instructions=parse_instructions(instructions_str)
 
-    blocks_moving=[]
-    for i in range(0, amount):
-        blocks_moving.append(stacks[move_from].pop())
-    blocks_moving.reverse()
+    for instruction in instructions:
+        amount, move_from, move_to = instruction
+        print(f"moving {amount} blocks from stack {move_from+1} to {move_to+1}")
 
-    stacks[move_to] = [*stacks[move_to], *blocks_moving]
+        blocks_moving=[]
+        for _ in range(0, amount):
+            blocks_moving.append(stacks[move_from].pop())
+        
+        if stage_two:
+            blocks_moving.reverse()
+
+        stacks[move_to] = [*stacks[move_to], *blocks_moving]
+    
+    final_state_code = [s[-1] for s in stacks]
+    return "".join(final_state_code)
 
 
-last = lambda s: s[-1]
-final_state_code = [last(s) for s in stacks]
-
-print("".join(final_state_code))    
+print(f"Part one {get_result(stacks_str, instructions)}, Part two: {get_result(stacks_str, instructions, True)}")    
