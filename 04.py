@@ -1,5 +1,4 @@
 from util.read_data import read_data
-from pprint import pprint
 
 input = read_data("04/input.txt")
 ranges = [list(j.split('-') for j in i) for i in [i.split(',') for i in input.split('\n')]]
